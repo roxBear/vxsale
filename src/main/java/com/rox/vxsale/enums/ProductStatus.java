@@ -1,0 +1,22 @@
+package com.rox.vxsale.enums;
+
+import lombok.Getter;
+
+/**
+ * @author roxBear
+ * @creat 2020/4/3
+ */
+@Getter
+public enum  ProductStatus {
+        UP(0,"在售"),
+        DOWN(1,"下架")
+    ;
+
+    private Integer code;
+    private String message;
+
+    ProductStatus(Integer code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+}

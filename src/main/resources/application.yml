@@ -1,0 +1,19 @@
+server:
+  port: 8888
+logging:
+  level:
+    com.rox.vxsale.mapper: debug
+    root: info
+  file: logs/vxsale.log
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/vxsale?serverTimezone=Asia/Shanghai&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: rx
+  jpa:
+    show-sql: true
+mybatis:
+  type-aliases-package: com.rox.order.entity
+  configuration:
+    map-underscore-to-camel-case: true
