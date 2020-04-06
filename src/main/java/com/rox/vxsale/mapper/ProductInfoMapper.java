@@ -4,6 +4,7 @@ import com.rox.vxsale.entity.ProductInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -29,4 +30,7 @@ public interface ProductInfoMapper {
 
     @Select("select * from product_info")
     List<ProductInfo> findAll();
+
+    @Update("update product_info set  product_stock = #{productStock} where product_id = #{productId}")
+    void updateStock(ProductInfo productInfo);
 }

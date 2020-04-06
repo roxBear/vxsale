@@ -2,13 +2,15 @@ package com.rox.vxsale.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * http请求返回最外层对象
  * @author roxBear
  * @creat 2020/4/3
  */
 @Data
-public class ResultVo<T> {
+public class ResultVo<T> implements Serializable {
 
     private Integer code;
     private String msg;

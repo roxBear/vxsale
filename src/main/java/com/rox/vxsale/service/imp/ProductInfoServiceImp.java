@@ -1,8 +1,11 @@
 package com.rox.vxsale.service.imp;
 
+import com.rox.vxsale.dto.CarDTO;
 import com.rox.vxsale.entity.ProductCategory;
 import com.rox.vxsale.entity.ProductInfo;
 import com.rox.vxsale.enums.ProductStatus;
+import com.rox.vxsale.exception.SaleErrorCode;
+import com.rox.vxsale.exception.SaleException;
 import com.rox.vxsale.mapper.ProductCategoryMapper;
 import com.rox.vxsale.mapper.ProductInfoMapper;
 import com.rox.vxsale.service.ProductInfoService;
@@ -37,7 +40,7 @@ public class ProductInfoServiceImp implements ProductInfoService {
 
     @Override
     public ProductInfo findOne(String productId) {
-        ProductInfo product = infoMapper.findById("040301");
+        ProductInfo product = infoMapper.findById(productId);
         return product;
     }
 
@@ -95,8 +98,40 @@ public class ProductInfoServiceImp implements ProductInfoService {
             //显示层每一个类目信息存放
             productVoList.add(productVo);
         }
-
         //设置返回对象
         return productVoList;
+    }
+
+
+    @Override
+    public void increaseStock(List<CarDTO> carDTOList) {
+        for(CarDTO carDTO : carDTOList){
+            ProductInfo productInfo = infoMapper.findById(carDTO.getProductId());
+            if(productInfo == null){
+                throw new SaleException(SaleErrorCode.PRODUCT_NOT_EXIST);
+            }
+            int count = productInfo.getProductStock() + carDTO.getProductQuantity();
+            if(count < 0){
+                 throw new SaleException(SaleErrorCode.PRODUCT_STOCK_ERROR);
+            }
+            productInfo.setProductStock(count);
+            infoMapper.updateStock(productInfo);
+        }
+    }
+
+    @Override
+    public void decreaseStock(List<CarDTO> carDTOList) {
+        for(CarDTO carDTO : carDTOList){
+            ProductInfo productInfo = infoMapper.findById(carDTO.getProductId());
+            if(productInfo == null){
+                throw new SaleException(SaleErrorCode.PRODUCT_NOT_EXIST);
+            }
+            int count = productInfo.getProductStock() - carDTO.getProductQuantity();
+            if(count < 0){
+                throw new SaleException(SaleErrorCode.PRODUCT_STOCK_ERROR);
+            }
+            productInfo.setProductStock(count);
+            infoMapper.updateStock(productInfo);
+        }
     }
 }

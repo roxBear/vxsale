@@ -23,6 +23,8 @@ public class ProductInfoServiceImpTest {
 
     @Autowired
     private ProductInfoServiceImp service;
+    @Autowired
+    private ProductInfoMapper mapper;
 
     @Test
     public void saveOne() {
@@ -49,10 +51,11 @@ public class ProductInfoServiceImpTest {
     }
 
     @Test
-    public void findByStatus() {
+    public void updateStock(){
+        ProductInfo productInfo = service.findOne("040305");
+        productInfo.setProductStock(productInfo.getProductStock()-20);
+        System.out.println(productInfo);
+        mapper.updateStock(productInfo);
     }
 
-    @Test
-    public void findAll() {
-    }
 }

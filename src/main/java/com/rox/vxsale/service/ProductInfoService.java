@@ -1,5 +1,6 @@
 package com.rox.vxsale.service;
 
+import com.rox.vxsale.dto.CarDTO;
 import com.rox.vxsale.entity.ProductInfo;
 import com.rox.vxsale.vo.ProductVo;
 
@@ -25,9 +26,11 @@ public interface ProductInfoService {
      */
     List<ProductVo> findAll();
 
-    //加库存
+    //修改库存
+    void increaseStock(List<CarDTO> carDTOList);
 
     //减库存
+    void decreaseStock(List<CarDTO> carDTOList);
 
     //上架
 
