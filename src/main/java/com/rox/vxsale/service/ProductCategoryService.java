@@ -18,4 +18,6 @@ public interface ProductCategoryService {
     int saveOne(ProductCategory productCategory);
 
     List<ProductCategory> findByCategoryNum(Integer categoryNum);
+
+    int delete(Integer categoryId);
 }

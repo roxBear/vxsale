@@ -1,7 +1,9 @@
 package com.rox.vxsale.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.rox.vxsale.entity.OrderDetail;
+import com.rox.vxsale.enums.EnumUtil;
 import com.rox.vxsale.enums.OrderStatus;
 import com.rox.vxsale.enums.PayStatus;
 import lombok.Data;
@@ -38,5 +40,15 @@ public class OrderDTO {
     private Date updateTime;
     /*每个订单中多个详情,一对多*/
     List<OrderDetail> orderDetailList;
+
+    @JsonIgnore
+    public OrderStatus getOrderStatusEnum() {
+        return EnumUtil.getByCode(orderStatus, OrderStatus.class);
+    }
+
+    @JsonIgnore
+    public PayStatus getPayStatusEnum() {
+        return EnumUtil.getByCode(payStatus, PayStatus.class);
+    }
 
 }

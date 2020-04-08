@@ -1,10 +1,7 @@
 package com.rox.vxsale.mapper;
 
 import com.rox.vxsale.entity.ProductInfo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -33,4 +30,10 @@ public interface ProductInfoMapper {
 
     @Update("update product_info set  product_stock = #{productStock} where product_id = #{productId}")
     void updateStock(ProductInfo productInfo);
+
+    @Update("update product_info set  product_status = #{productStatus} where product_id = #{productId}")
+    int updateStatus(ProductInfo productInfo);
+
+    @Delete("delete from product_info where product_id = #{productId}")
+    int delete(String productId);
 }

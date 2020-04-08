@@ -7,11 +7,11 @@ import lombok.Getter;
  * @creat 2020/4/4
  */
 @Getter
-public enum  PayStatus {
+public enum  PayStatus implements EnumCode{
 
     WAIT(0, "等待支付"),
     SUCCESS(1, "支付成功"),
-
+    REBACK_MONEY(2 , "已退款")
     ;
     private Integer code;
 

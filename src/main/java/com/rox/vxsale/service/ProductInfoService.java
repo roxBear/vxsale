@@ -33,6 +33,14 @@ public interface ProductInfoService {
     void decreaseStock(List<CarDTO> carDTOList);
 
     //上架
+    void onSale(String productId);
 
     //下架
+    void offSale(String productId);
+
+    //删除
+    int delete(String productId);
+
+    //查询某类目所有商品
+    List<ProductInfo> findByCategoryNum(Integer categoryNum);
 }

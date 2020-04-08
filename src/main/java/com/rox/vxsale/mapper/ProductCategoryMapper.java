@@ -20,7 +20,7 @@ public interface ProductCategoryMapper {
     @Update("update product_category set category_name=#{categoryName},category_num=#{categoryNum},update_time=#{updateTime} where category_id=#{categoryId}")
     int updateOne(ProductCategory productCategory);
 
-    @Delete("delete * from product_category where category_id = #{categoryId}")
+    @Delete("delete from product_category where category_id = #{categoryId}")
     int deleteOne(Integer categoryId);
 
     @Select("select * from product_category")

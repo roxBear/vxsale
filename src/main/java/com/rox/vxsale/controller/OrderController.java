@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.xml.transform.Result;
@@ -29,13 +26,14 @@ import java.util.Map;
  */
 @RestController
 @Slf4j
+@RequestMapping("/order")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
     //创建订单
-    @PostMapping("/order/create")
+    @PostMapping("create")
     public ResultVo<Map<String, String>> create(@Valid OrderForm orderForm,
                                                 BindingResult bindingResult) {/*BindingResult与Valid结合验证表单信息*/
 
@@ -62,7 +60,7 @@ public class OrderController {
 
 
     //订单列表
-    @GetMapping("/order/list")
+    @GetMapping("list")
     public ResultVo<List<OrderDTO>> list(@RequestParam("openid") String openid)
                                          /*@RequestParam(value = "page", defaultValue = "0") Integer page,
                                          @RequestParam(value = "size", defaultValue = "10") Integer size)*/ {
@@ -76,7 +74,7 @@ public class OrderController {
     }
 
     //订单详情
-    @GetMapping("/order/detail")
+    @GetMapping("detail")
     public ResultVo detail(@RequestParam("orderId") String orderId,
                            @RequestParam(value = "openId",required = false) String openId){
           //TODO
@@ -86,7 +84,7 @@ public class OrderController {
 
 
     //订单取消
-    @GetMapping("/order/cancel")
+    @GetMapping("cancel")
     public ResultVo cancel(@RequestParam("orderId") String orderId,
                            @RequestParam(value = "openId",required = false) String openId){
         OrderDTO orderDTO = orderService.findByOrderId(orderId);

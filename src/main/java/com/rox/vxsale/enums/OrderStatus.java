@@ -7,10 +7,12 @@ import lombok.Getter;
  * @creat 2020/4/4
  */
 @Getter
-public enum  OrderStatus {
+public enum  OrderStatus implements EnumCode{
     NEW(0,"新订单"),
-    FINISHED(1,"已完成"),
-    CANCEL(3,"已取消"),
+    PAYED(1,"已支付"),
+    CANCEL(2,"已取消"),
+    FINISHED(3,"已完成"),
+    COMMENT(4,"已评价"),
     ;
 
     private Integer code;

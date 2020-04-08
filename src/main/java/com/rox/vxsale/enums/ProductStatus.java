@@ -7,7 +7,7 @@ import lombok.Getter;
  * @creat 2020/4/3
  */
 @Getter
-public enum  ProductStatus {
+public enum  ProductStatus implements EnumCode{
         UP(0,"在售"),
         DOWN(1,"下架")
     ;

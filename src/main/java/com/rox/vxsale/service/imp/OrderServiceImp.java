@@ -177,6 +177,7 @@ public class OrderServiceImp implements OrderService {
         }
         /*修改订单状态*/
         orderDTO.setOrderStatus(OrderStatus.CANCEL.getCode());
+        orderDTO.setPayStatus(PayStatus.REBACK_MONEY.getCode());
         Order order = new Order();
         BeanUtils.copyProperties(orderDTO,order);
         int flag = orderMapper.update(order);
@@ -235,6 +236,11 @@ public class OrderServiceImp implements OrderService {
     public OrderDTO finishOrder(OrderDTO orderDTO) {
         if(!orderDTO.getOrderStatus().equals(OrderStatus.NEW.getCode())){
             log.error("【订单完结】订单状态不正确");
+            throw new SaleException(SaleErrorCode.ORDER_STATUS_ERROR);
+        }
+        //只有已支付订单才可以完结订单
+        if(!orderDTO.getOrderStatus().equals(OrderStatus.NEW.getCode())){
+            log.error("【完结订单】 订单状态不正确 , orderId={} , orderStatus={}" , orderDTO.getOrderId() , orderDTO.getOrderStatus());
             throw new SaleException(SaleErrorCode.ORDER_STATUS_ERROR);
         }
         /*修改订单状态*/

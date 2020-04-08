@@ -23,4 +23,12 @@ public class KeyUtil {
         String uniqueKey = sdf.format(new Date()) + count;
         return uniqueKey;
     }
+
+    public static String getProductId(){
+        SimpleDateFormat sdf = new SimpleDateFormat("MMdd");
+        Random random = new Random();
+        int count = random.nextInt(9) + 1;
+        String uniqueKey = sdf.format(new Date()) + 0+count;
+        return uniqueKey;
+    }
 }

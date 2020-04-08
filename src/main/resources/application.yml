@@ -17,3 +17,31 @@ mybatis:
   type-aliases-package: com.rox.order.entity
   configuration:
     map-underscore-to-camel-case: true
+
+pagehelper:
+  dialect: mysql
+  params: count=countSql
+  reasonable: true
+  support-methods-arguments: true
+
+projecturl:
+  wechatMpAuthorize: http://lsx888.natapp1.cc
+  wechatOpenAuthorize: http://lsx888.natapp1.cc
+  sale: http://localhost:8888
+wechat:
+  # 公众账号, 授权
+  mpAppId: wxd898fcb01713c658
+  mpAppSecret:
+
+  # 开放平台,  卖家扫码登录用
+  openAppId: wx6ad144e54af67d87
+  openAppSecret: 91a2ff6d38a2bbccfb7e9xxxxxx
+
+  # 支付/商户号
+  mchId: 1483469312
+  mchKey: 06C56A89949D617xxxxxxxxxxx
+  # 发起支付不需要证书, 退款需要
+  keyPath:
+  notifyUrl: http://sell.natapp4.cc/sell/pay/notify
+  templateId:
+    orderStatus: e-Cqq67QxD6YNI41iRiqawEYdFavW_7pc7LyEMb-yeQ

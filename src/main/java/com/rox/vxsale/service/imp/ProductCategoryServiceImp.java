@@ -48,4 +48,11 @@ public class ProductCategoryServiceImp implements ProductCategoryService {
         List<ProductCategory> productByCategory = categoryMapper.findByCategoryNum(categoryNum);
         return productByCategory;
     }
+
+    @Override
+    public int delete(Integer categoryId) {
+        int count = categoryMapper.deleteOne(categoryId);
+        return count;
+    }
+
 }

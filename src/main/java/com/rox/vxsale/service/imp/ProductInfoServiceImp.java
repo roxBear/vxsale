@@ -11,7 +11,6 @@ import com.rox.vxsale.mapper.ProductInfoMapper;
 import com.rox.vxsale.service.ProductInfoService;
 import com.rox.vxsale.vo.ProductInfoVo;
 import com.rox.vxsale.vo.ProductVo;
-import com.rox.vxsale.vo.ResultVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -133,5 +132,43 @@ public class ProductInfoServiceImp implements ProductInfoService {
             productInfo.setProductStock(count);
             infoMapper.updateStock(productInfo);
         }
+    }
+
+    @Override
+    public void onSale(String productId) {
+        ProductInfo productInfo = infoMapper.findById(productId);
+        if (productInfo == null) {
+            throw new SaleException(SaleErrorCode.PRODUCT_NOT_EXIST);
+        }
+        if (productInfo.getProductStatus() == ProductStatus.UP.getCode()) {
+            throw new SaleException(SaleErrorCode.PRODUCT_STATUS_ERROR);
+        }
+        productInfo.setProductStatus(ProductStatus.UP.getCode());
+        infoMapper.updateStatus(productInfo);
+    }
+
+    @Override
+    public void offSale(String productId) {
+        ProductInfo productInfo = infoMapper.findById(productId);
+        if (productInfo == null) {
+            throw new SaleException(SaleErrorCode.PRODUCT_NOT_EXIST);
+        }
+        if (productInfo.getProductStatus() == ProductStatus.DOWN.getCode()) {
+            throw new SaleException(SaleErrorCode.PRODUCT_STATUS_ERROR);
+        }
+        productInfo.setProductStatus(ProductStatus.DOWN.getCode());
+        infoMapper.updateStatus(productInfo);
+    }
+
+    @Override
+    public int delete(String productId) {
+        int count = infoMapper.delete(productId);
+        return count;
+    }
+
+    @Override
+    public List<ProductInfo> findByCategoryNum(Integer categoryNum) {
+        List<ProductInfo> productInfoList = infoMapper.findByCategoryNum(categoryNum);
+        return productInfoList;
     }
 }

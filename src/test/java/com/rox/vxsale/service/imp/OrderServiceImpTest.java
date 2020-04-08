@@ -2,7 +2,6 @@ package com.rox.vxsale.service.imp;
 
 import com.rox.vxsale.dto.OrderDTO;
 import com.rox.vxsale.entity.OrderDetail;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,14 +12,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * @author roxBear
  * @creat 2020/4/5
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Slf4j
 public class OrderServiceImpTest {
 
@@ -77,7 +74,7 @@ public class OrderServiceImpTest {
 
     @Test
     public void findAll() {
-        List<OrderDTO> orderDTOList = orderService.findAll();
+        List<OrderDTO> orderDTOList = orderService.findAll(page, size);
         for (OrderDTO orderDTO : orderDTOList) {
             System.out.println(orderDTO);
         }
