@@ -74,7 +74,7 @@ public class OrderServiceImpTest {
 
     @Test
     public void findAll() {
-        List<OrderDTO> orderDTOList = orderService.findAll(page, size);
+        List<OrderDTO> orderDTOList = orderService.findAll();
         for (OrderDTO orderDTO : orderDTOList) {
             System.out.println(orderDTO);
         }

@@ -19,7 +19,7 @@ mybatis:
     map-underscore-to-camel-case: true
 
 pagehelper:
-  dialect: mysql
+  #dialect: mysql
   params: count=countSql
   reasonable: true
   support-methods-arguments: true
