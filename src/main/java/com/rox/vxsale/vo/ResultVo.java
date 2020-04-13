@@ -1,5 +1,6 @@
 package com.rox.vxsale.vo;
 
+import com.rox.vxsale.exception.SaleException;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -38,5 +39,20 @@ public class ResultVo<T> implements Serializable {
         resultVo.setCode(200);
         resultVo.setMsg("成功");
         return resultVo;
+    }
+
+
+    public static ResultVo errorOf(SaleException e){
+        ResultVo resultVo = new ResultVo();
+        resultVo.setCode(e.getCode());
+        resultVo.setMsg(e.getMessage());
+        return resultVo;
+    }
+
+    public static ResultVo errorOf(Integer code, String message) {
+        ResultVo resultVO = new ResultVo();
+        resultVO.setCode(code);
+        resultVO.setMsg(message);
+        return resultVO;
     }
 }

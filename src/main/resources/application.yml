@@ -2,7 +2,7 @@ server:
   port: 8888
 logging:
   level:
-    com.rox.vxsale.mapper: debug
+    com.rox.vxsale.mapper: trace
     root: info
   file: logs/vxsale.log
 spring:

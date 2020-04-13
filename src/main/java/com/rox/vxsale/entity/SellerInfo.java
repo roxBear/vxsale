@@ -20,10 +20,10 @@ public class SellerInfo {
     private Integer sellerId;
 
     //商家用户名称
-    private String username;
+    private String userName;
 
     //商家登录密码
-    private String password;
+    private String passWord;
 
     //商家手机
     private String phone;

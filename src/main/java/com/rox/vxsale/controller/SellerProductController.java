@@ -14,6 +14,8 @@ import com.rox.vxsale.utils.KeyUtil;
 import com.rox.vxsale.vo.ProductVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -134,7 +136,9 @@ public class SellerProductController {
      * 保存/更新 商品
      * @return
      */
+    //@CacheEvict(cacheNames = "product",key = "123")
     @PostMapping("save")
+    //@CachePut(cacheNames = "product",key = "123")
     public ModelAndView save(@Valid ProductForm form ,
                              BindingResult bindingResult ,
                              Map<String , Object> map){

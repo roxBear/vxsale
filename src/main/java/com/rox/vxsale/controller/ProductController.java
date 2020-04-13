@@ -8,6 +8,7 @@ import com.rox.vxsale.vo.ProductVo;
 import com.rox.vxsale.vo.ResultVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +33,9 @@ public class ProductController {
      * 查询所有商品
      * @return
      */
+    //@Cacheable(cacheNames = "product", key = "#sellerId", condition = "#sellerId.length() > 3", unless = "#result.getCode() != 0")
     @GetMapping("list")
+    @Cacheable(cacheNames = "product",key = "123")
     public ResultVo list(){
 
         //返回显示层VO对象
