@@ -1,5 +1,7 @@
 package com.rox.vxsale.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.rox.vxsale.dto.OrderDTO;
 import com.rox.vxsale.dto.OrderForm;
 import com.rox.vxsale.exception.SaleErrorCode;
@@ -61,16 +63,18 @@ public class OrderController {
 
     //订单列表
     @GetMapping("list")
-    public ResultVo<List<OrderDTO>> list(@RequestParam("openid") String openid)
-                                         /*@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                         @RequestParam(value = "size", defaultValue = "10") Integer size)*/ {
+    public ResultVo<List<OrderDTO>> list(@RequestParam("openid") String openid,
+                                         @RequestParam(value = "page" , defaultValue = "1") Integer page ,
+                                         @RequestParam(value = "size" , defaultValue = "8") Integer size){
         if (StringUtils.isEmpty(openid)) {
             log.error("【查询订单列表】openid为空");
             throw new SaleException(SaleErrorCode.USER_NOT_FOUND);
         }
-        //List<OrderDTO> orderDTOList = orderService.findByOpenId(openid);
+        String orderBy = "create_time desc";
+        PageHelper.startPage(page,size,orderBy);
         List<OrderDTO> orderDTOPage = orderService.findByOpenId(openid);
-        return ResultVo.successOf(orderDTOPage);
+        PageInfo<OrderDTO> pageInfo = new PageInfo<OrderDTO>(orderDTOPage);
+        return ResultVo.successOf(pageInfo);
     }
 
     //订单详情

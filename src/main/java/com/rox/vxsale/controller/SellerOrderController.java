@@ -43,7 +43,7 @@ public class SellerOrderController {
      * @param map
      * @return
      */
-    @GetMapping("list")
+    @GetMapping("/list")
     public ModelAndView list(@RequestParam(value = "page" , defaultValue = "1") Integer page ,
                              @RequestParam(value = "size" , defaultValue = "8") Integer size ,
                              Map<String , Object> map){
@@ -54,14 +54,14 @@ public class SellerOrderController {
 //        map.put("currentPage" , page);
 //        map.put("size" , size);
 
-        String orderBy = "create_time"+"desc";
+        String orderBy = "create_time desc";
         PageHelper.startPage(page,size,orderBy);
         List<OrderDTO> orderDTOList = orderService.findAll();
         PageInfo<OrderDTO> pageInfo = new PageInfo<OrderDTO>(orderDTOList);
         map.put("orderDTOPage" , pageInfo);
-        map.put("currentPage" , page);
+        map.put("currentPage" , pageInfo.getPageNum());
         map.put("size" , size);
-        return new ModelAndView("order/list" , map);
+        return new ModelAndView("/order/list" , map);
     }
 
 
@@ -70,7 +70,7 @@ public class SellerOrderController {
      * @param orderId 订单的ID
      * @return
      */
-    @GetMapping("cancel")
+    @GetMapping("/cancel")
     public ModelAndView cancel(@RequestParam("orderId") String orderId ,
                                Map<String , Object> map){
         try{
@@ -105,7 +105,7 @@ public class SellerOrderController {
             return new ModelAndView("common/error", map);
         }
         map.put("orderDTO" , orderDTO);
-        return new ModelAndView("order/detail", map);
+        return new ModelAndView("/sale/order/detail", map);
     }
 
     /**
@@ -143,7 +143,7 @@ public class SellerOrderController {
         }
         OrderDTO orderDTO = orderService.findByOrderId(orderId);
         map.put("orderDTO" , orderDTO);
-        return new ModelAndView("order/list1" , map);
+        return new ModelAndView("/order/list1" , map);
     }
 
 }

@@ -60,14 +60,14 @@ public class SellerProductController {
         map.put("size" , size);
         return new ModelAndView("product/list" , map);*/
 
-        String orderBy = "create_time"+"desc";
+        String orderBy = "create_time desc";
         PageHelper.startPage(page,size,orderBy);
         List<ProductVo> productList = productInfoService.findAll();
         PageInfo<ProductVo> pageInfo = new PageInfo<ProductVo>(productList);
         map.put("productInfoPage" , pageInfo);
         map.put("currentPage" , page);
         map.put("size" , size);
-        return new ModelAndView("order/list" , map);
+        return new ModelAndView("product/list" , map);
     }
 
     /**

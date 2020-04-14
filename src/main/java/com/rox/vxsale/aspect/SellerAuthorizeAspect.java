@@ -5,6 +5,7 @@ import com.rox.vxsale.constant.RedisConstant;
 import com.rox.vxsale.exception.SellerAuthorizeException;
 import com.rox.vxsale.utils.CookieUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -39,15 +40,15 @@ public class SellerAuthorizeAspect {
         Cookie cookie = CookieUtil.get(request , CookieConstant.TOKEN);
         if(cookie == null){
             log.warn("【登录校验】 Cookie中查询不到token");
-            String msg = "登录失败！";
-            throw new SellerAuthorizeException(msg);
+            throw new SellerAuthorizeException();
         }
 
-        /*去redis查询
+        //去redis查询
         String tokenValue = redisTemplate.opsForValue().get(String.format(RedisConstant.TOKEN_PREFIX , cookie.getValue()));
         if(StringUtils.isEmpty(tokenValue)){
             log.warn("【登录校验】 Redis中查询不到token");
-            throw new SellerAuthorizeException();
-        }*/
+            String msg = "登录失败！";
+            throw new SellerAuthorizeException(msg);
+        }
     }
 }

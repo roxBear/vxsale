@@ -28,7 +28,7 @@ import java.util.Optional;
  */
 @Controller
 @RequestMapping("/seller/category")
-public class SellerCategory {
+public class SellerCategoryController {
 
     @Autowired
     private ProductCategoryService categoryService;

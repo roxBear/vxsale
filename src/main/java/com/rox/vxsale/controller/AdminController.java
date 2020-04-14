@@ -1,5 +1,6 @@
 package com.rox.vxsale.controller;
 
+import com.rox.vxsale.config.ProjectUrlConfig;
 import com.rox.vxsale.constant.CookieConstant;
 import com.rox.vxsale.constant.RedisConstant;
 import com.rox.vxsale.dto.SellerForm;
@@ -11,6 +12,7 @@ import com.rox.vxsale.utils.CookieUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -27,6 +29,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author roxBear
@@ -39,6 +42,10 @@ public class AdminController {
 
     @Autowired
     private SellerService sellerService;
+    @Autowired
+    private ProjectUrlConfig projectUrlConfig;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @GetMapping("/loginAdmin")
     public ModelAndView loginAdmin(@RequestParam("phone") String phone ,
@@ -56,12 +63,12 @@ public class AdminController {
         String token = UUID.randomUUID().toString();
         Integer expire = RedisConstant.EXPIRE;
 
-        /*redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_PREFIX, token), openid, expire, TimeUnit.SECONDS);*/
+        redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_PREFIX, token), phone, expire, TimeUnit.SECONDS);
 
         //3. 设置token至cookie
         CookieUtil.set(response, CookieConstant.TOKEN, token, expire);
 
-        return new ModelAndView("redirect:localhost:8888/seller/order/list");
+        return new ModelAndView("redirect:" + projectUrlConfig.getSale() + "/sale/seller/order/list");
     }
 
     @GetMapping("/logout")
@@ -72,7 +79,7 @@ public class AdminController {
         Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
         if (cookie != null) {
             //2. 清除redis
-            /*redisTemplate.opsForValue().getOperations().delete(String.format(RedisConstant.TOKEN_PREFIX, cookie.getValue()));*/
+            redisTemplate.opsForValue().getOperations().delete(String.format(RedisConstant.TOKEN_PREFIX, cookie.getValue()));
             //3. 清除cookie
             CookieUtil.set(response, CookieConstant.TOKEN, null, 0);
         }

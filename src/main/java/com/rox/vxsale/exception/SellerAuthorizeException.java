@@ -13,4 +13,6 @@ public class SellerAuthorizeException extends RuntimeException {
     public SellerAuthorizeException(String msg) {
         this.msg = msg;
     }
+    public SellerAuthorizeException() {
+    }
 }

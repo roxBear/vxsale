@@ -1,5 +1,7 @@
 server:
   port: 8888
+  servlet:
+    context-path: /sale
 logging:
   level:
     com.rox.vxsale.mapper: trace
