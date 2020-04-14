@@ -43,12 +43,12 @@ public class SellerAuthorizeAspect {
             throw new SellerAuthorizeException();
         }
 
-        //去redis查询
+        /*//去redis查询
         String tokenValue = redisTemplate.opsForValue().get(String.format(RedisConstant.TOKEN_PREFIX , cookie.getValue()));
         if(StringUtils.isEmpty(tokenValue)){
             log.warn("【登录校验】 Redis中查询不到token");
             String msg = "登录失败！";
             throw new SellerAuthorizeException(msg);
-        }
+        }*/
     }
 }

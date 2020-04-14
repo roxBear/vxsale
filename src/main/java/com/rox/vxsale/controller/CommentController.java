@@ -25,7 +25,7 @@ public class CommentController {
 
     //评论
     @PostMapping("/comment")
-    public ResultVo<Comment> comment(@RequestParam("openid") String openid ,
+    public ResultVo<Comment> comment(@RequestParam(value = "openid",required = false) String openid ,
                                 @RequestParam("username") String username ,
                                 @RequestParam("avatarUrl") String avatarUrl ,
                                 @RequestParam("content") String content
@@ -45,7 +45,7 @@ public class CommentController {
 
     //评论详情
     @GetMapping("/comment/index")
-    public ResultVo<Comment> index(@RequestParam("openid") String openid){
+    public ResultVo<Comment> index(@RequestParam(value = "openid",required = false) String openid){
         List<Comment> comments =commentMapper.findByOpenId(openid);
         return ResultVo.successOf(comments);
     }
@@ -61,7 +61,7 @@ public class CommentController {
 
     //单个用户的所有评论
     @GetMapping("/userCommentList")
-    public ResultVo<List<Comment>> userCommentList(@RequestParam("openid") String openid){
+    public ResultVo<List<Comment>> userCommentList(@RequestParam(value = "openid",required = false) String openid){
         List<Comment> comments =commentMapper.findByOpenId(openid);
         return ResultVo.successOf(comments);
     }

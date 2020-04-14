@@ -26,5 +26,5 @@ public class ProjectUrlConfig {
     /**
      * 项目
      */
-    public String sale;
+    public String sell;
 }

@@ -68,7 +68,7 @@ public class AdminController {
         //3. 设置token至cookie
         CookieUtil.set(response, CookieConstant.TOKEN, token, expire);
 
-        return new ModelAndView("redirect:" + projectUrlConfig.getSale() + "/sale/seller/order/list");
+        return new ModelAndView("redirect:" + projectUrlConfig.getSell() + "/sale/seller/order/list");
     }
 
     @GetMapping("/logout")

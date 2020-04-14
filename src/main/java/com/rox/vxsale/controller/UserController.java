@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @GetMapping("/getUserInfo")
-    public ResultVo getUserInfo(@RequestParam("openid") String openid){
+    public ResultVo getUserInfo(@RequestParam(value = "openid",required = false) String openid){
         User user = userService.findByOpenid(openid);
         return ResultVo.successOf(user);
     }

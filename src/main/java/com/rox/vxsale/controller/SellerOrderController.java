@@ -58,10 +58,10 @@ public class SellerOrderController {
         PageHelper.startPage(page,size,orderBy);
         List<OrderDTO> orderDTOList = orderService.findAll();
         PageInfo<OrderDTO> pageInfo = new PageInfo<OrderDTO>(orderDTOList);
-        map.put("orderDTOPage" , pageInfo);
+        map.put("orderDTOPage" , orderDTOList);
         map.put("currentPage" , pageInfo.getPageNum());
         map.put("size" , size);
-        return new ModelAndView("/order/list" , map);
+        return new ModelAndView("/order/Hlist" , map);
     }
 
 
@@ -92,7 +92,7 @@ public class SellerOrderController {
      * @param orderId
      * @return
      */
-    @GetMapping("detail")
+    @GetMapping("/detail")
     public ModelAndView detail(@RequestParam("orderId") String orderId ,
                                Map<String , Object> map) {
         OrderDTO orderDTO = new OrderDTO();
@@ -114,7 +114,7 @@ public class SellerOrderController {
      * @param map
      * @return
      */
-    @GetMapping("finish")
+    @GetMapping("/finish")
     public ModelAndView finish(@RequestParam("orderId") String orderId ,
                                Map<String , Object> map){
         try {
@@ -132,7 +132,7 @@ public class SellerOrderController {
     }
 
 
-    @PostMapping("search")
+    @PostMapping("/search")
     public ModelAndView search(HttpServletRequest request ,
                                HttpServletResponse response ,
                                Map<String , Object> map) throws IOException {

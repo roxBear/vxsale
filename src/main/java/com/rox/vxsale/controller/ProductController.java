@@ -35,7 +35,7 @@ public class ProductController {
      */
     //@Cacheable(cacheNames = "product", key = "#sellerId", condition = "#sellerId.length() > 3", unless = "#result.getCode() != 0")
     @GetMapping("list")
-    @Cacheable(cacheNames = "product",key = "123")
+    //@Cacheable(cacheNames = "product",key = "123")
     public ResultVo list(){
 
         //返回显示层VO对象

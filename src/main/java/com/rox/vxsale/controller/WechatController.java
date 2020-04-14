@@ -38,7 +38,7 @@ public class WechatController {
     public String authorize(@RequestParam("returnUrl") String returnUrl) {
         //1. 配置
         //2. 调用方法
-        String url = projectUrlConfig.getWechatMpAuthorize() + "/sell/wechat/userInfo";
+        String url = projectUrlConfig.getWechatMpAuthorize() + "/sale/wechat/userInfo";
         //String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl));
         //return "redirect:" + redirectUrl;
         return "";
@@ -62,7 +62,7 @@ public class WechatController {
 
     @GetMapping("/qrAuthorize")
     public String qrAuthorize(@RequestParam("returnUrl") String returnUrl) {
-        String url = projectUrlConfig.getWechatOpenAuthorize() + "/sell/wechat/qrUserInfo";
+        String url = projectUrlConfig.getWechatOpenAuthorize() + "/sale/wechat/qrUserInfo";
         //String redirectUrl = wxOpenService.buildQrConnectUrl(url, WxConsts.QRCONNECT_SCOPE_SNSAPI_LOGIN, URLEncoder.encode(returnUrl));
         String redirectUrl = "";
         return "redirect:" + redirectUrl;

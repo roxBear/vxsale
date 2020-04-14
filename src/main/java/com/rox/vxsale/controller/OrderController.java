@@ -35,7 +35,7 @@ public class OrderController {
     private OrderService orderService;
 
     //创建订单
-    @PostMapping("create")
+    @PostMapping("/create")
     public ResultVo<Map<String, String>> create(@Valid OrderForm orderForm,
                                                 BindingResult bindingResult) {/*BindingResult与Valid结合验证表单信息*/
 
@@ -62,8 +62,8 @@ public class OrderController {
 
 
     //订单列表
-    @GetMapping("list")
-    public ResultVo<List<OrderDTO>> list(@RequestParam("openid") String openid,
+    @GetMapping("/listAll")
+    public ResultVo<List<OrderDTO>> list(@RequestParam(value = "openid",required = false) String openid,
                                          @RequestParam(value = "page" , defaultValue = "1") Integer page ,
                                          @RequestParam(value = "size" , defaultValue = "8") Integer size){
         if (StringUtils.isEmpty(openid)) {
@@ -78,9 +78,9 @@ public class OrderController {
     }
 
     //订单详情
-    @GetMapping("detail")
-    public ResultVo detail(@RequestParam("orderId") String orderId,
-                           @RequestParam(value = "openId",required = false) String openId){
+    @GetMapping("/detail")
+    public ResultVo detail(@RequestParam("orderid") String orderId,
+                           @RequestParam(value = "openid",required = false) String openId){
           //TODO
         OrderDTO orderDTO = orderService.findByOrderId(orderId);
         return ResultVo.successOf(orderDTO);
@@ -88,9 +88,9 @@ public class OrderController {
 
 
     //订单取消
-    @GetMapping("cancel")
+    @GetMapping("/cancel")
     public ResultVo cancel(@RequestParam("orderId") String orderId,
-                           @RequestParam(value = "openId",required = false) String openId){
+                           @RequestParam(value = "openid",required = false) String openId){
         OrderDTO orderDTO = orderService.findByOrderId(orderId);
         orderService.cancelOrder(orderDTO);
         return ResultVo.successOf();
